@@ -7,10 +7,10 @@
       "file": "index.html"
     },
     {
-      "code": "ptbr",
+      "code": "pt-br",
       "hreflang": "pt-BR",
       "label": "PT — Português (BR)",
-      "file": "ptbr.html"
+      "file": "pt-br.html"
     },
     {
       "code": "ru",
@@ -22,7 +22,7 @@
       "code": "zh-tw",
       "hreflang": "zh-TW",
       "label": "ZH — 繁體中文 (台灣)",
-      "file": "zhtw.html"
+      "file": "zh-tw.html"
     },
     {
       "code": "zh-cn",

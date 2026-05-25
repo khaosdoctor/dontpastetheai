@@ -15,20 +15,20 @@
         />
         <meta
             property="og:image"
-            content="https://dontquotetheai.com/assets/og-image-zh-cn.png"
+            content="https://dontpastetheai.com/assets/og-image-zh-cn.png"
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="website" />
         <meta
             property="og:url"
-            content="https://dontquotetheai.com/zh-cn.html"
+            content="https://dontpastetheai.com/zh-cn.html"
         />
-        <link rel="canonical" href="https://dontquotetheai.com/zh-cn.html" />
+        <link rel="canonical" href="https://dontpastetheai.com/zh-cn.html" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
             name="twitter:image"
-            content="https://dontquotetheai.com/assets/og-image-zh-cn.png"
+            content="https://dontpastetheai.com/assets/og-image-zh-cn.png"
         />
         <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
         <link
@@ -59,34 +59,35 @@
         <link
             rel="alternate"
             hreflang="en"
-            href="https://dontquotetheai.com/"
+            href="https://dontpastetheai.com/"
         />
         <link
             rel="alternate"
             hreflang="pt-BR"
-            href="https://dontquotetheai.com/ptbr.html"
+            href="https://dontpastetheai.com/pt-br.html"
         />
         <link
             rel="alternate"
             hreflang="ru"
-            href="https://dontquotetheai.com/ru.html"
+            href="https://dontpastetheai.com/ru.html"
         />
         <link
             rel="alternate"
             hreflang="zh-CN"
-            href="https://dontquotetheai.com/zh-cn.html"
+            href="https://dontpastetheai.com/zh-cn.html"
         />
         <link
             rel="alternate"
             hreflang="zh-TW"
-            href="https://dontquotetheai.com/zhtw.html"
+            href="https://dontpastetheai.com/zh-tw.html"
         />
         <link
             rel="alternate"
             hreflang="x-default"
-            href="https://dontquotetheai.com/"
+            href="https://dontpastetheai.com/"
         />
         <script src="assets/translations.js" defer></script>
+        <script src="assets/copy.js" defer></script>
     </head>
 
     <body>
@@ -95,7 +96,7 @@
                 <div class="doc-meta">
                     <span>切换语言</span>
                     <label class="lang" aria-label="语言">
-                        <select data-lang-select><option>EN — English</option></select>
+                        <select data-lang-select><option>ZH — 简体中文</option></select>
                     </label>
                 </div>
                 <h1>别抄<br /><span class="yell">AI</span> 的回答，哥们。</h1>
@@ -153,8 +154,8 @@
                         id="copyBtn"
                         type="button"
                         class="url-tag-big"
-                        onclick="copyTag(this)"
-                        aria-label="将 dontpastetheai.com 复制到剪贴板"
+                        data-copy-aria="将 {domain} 复制到剪贴板"
+                        data-copied-text="已复制！"
                     >
                         dontpastetheai.com
                     </button>
@@ -213,25 +214,5 @@
                 </p>
             </div>
         </main>
-        <script>
-            (function setCopyDomain() {
-                const target = location.hostname.replace(/^www\./, "");
-                const btn = document.getElementById("copyBtn");
-                btn.textContent = target;
-                btn.dataset.copy = target;
-                btn.setAttribute("aria-label", `将 ${target} 复制到剪贴板`);
-            })();
-            function copyTag(el) {
-                const text = el.dataset.copy || el.textContent.trim();
-                if (!el.dataset.copy) el.dataset.copy = text;
-                navigator.clipboard.writeText(text).then(() => {
-                    el.textContent = "已复制！";
-                    clearTimeout(el._t);
-                    el._t = setTimeout(() => {
-                        el.textContent = text;
-                    }, 1200);
-                });
-            }
-        </script>
     </body>
 </html>

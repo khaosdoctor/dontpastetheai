@@ -8,14 +8,14 @@
   <meta name="description" content="If your reply is a wall of unedited LLM junk, you are the problem.">
   <meta property="og:title" content="Don't just 'quote' the AI">
   <meta property="og:description" content="If your reply is a wall of unedited LLM junk, you are the problem.">
-  <meta property="og:image" content="https://dontquotetheai.com/assets/og-image.png">
+  <meta property="og:image" content="https://dontpastetheai.com/assets/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://dontquotetheai.com/angry/">
-  <link rel="canonical" href="https://dontquotetheai.com/angry/">
+  <meta property="og:url" content="https://dontpastetheai.com/angry/">
+  <link rel="canonical" href="https://dontpastetheai.com/angry/">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://dontquotetheai.com/assets/og-image.png">
+  <meta name="twitter:image" content="https://dontpastetheai.com/assets/og-image.png">
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
@@ -25,13 +25,14 @@
     href="https://fonts.googleapis.com/css2?family=Special+Elite&family=JetBrains+Mono:wght@400;500;700;800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
-  <link rel="alternate" hreflang="en" href="https://dontquotetheai.com/angry/">
-  <link rel="alternate" hreflang="pt-BR" href="https://dontquotetheai.com/angry/ptbr.html">
-  <link rel="alternate" hreflang="ru" href="https://dontquotetheai.com/angry/ru.html">
-  <link rel="alternate" hreflang="zh-TW" href="https://dontquotetheai.com/angry/zhtw.html">
-  <link rel="alternate" hreflang="zh-CN" href="https://dontquotetheai.com/angry/zh-cn.html">
-  <link rel="alternate" hreflang="x-default" href="https://dontquotetheai.com/angry/">
+  <link rel="alternate" hreflang="en" href="https://dontpastetheai.com/angry/">
+  <link rel="alternate" hreflang="pt-BR" href="https://dontpastetheai.com/angry/pt-br.html">
+  <link rel="alternate" hreflang="ru" href="https://dontpastetheai.com/angry/ru.html">
+  <link rel="alternate" hreflang="zh-TW" href="https://dontpastetheai.com/angry/zh-tw.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://dontpastetheai.com/angry/zh-cn.html">
+  <link rel="alternate" hreflang="x-default" href="https://dontpastetheai.com/angry/">
   <script src="../assets/translations.js" defer></script>
+  <script src="../assets/copy.js" defer></script>
 </head>
 
 <body>
@@ -140,8 +141,8 @@
       <h2>How to use this</h2>
       <p>Next time someone drops an amazing set of unedited LLM text in your DMs, your Slack, your code review, anywhere
         really, send them this:</p>
-      <p class="u-center u-mt-lg"><button id="copyBtn" type="button" class="url-tag-big" onclick="copyTag(this)"
-          aria-label="Copy dontpastetheai.com to clipboard">dontpastetheai.com</button></p>
+      <p class="u-center u-mt-lg"><button id="copyBtn" type="button" class="url-tag-big"
+          data-copy-aria="Copy {domain} to clipboard" data-copied-text="copied!">dontpastetheai.com</button></p>
       <p class="u-center u-small u-muted u-mt-md">Click to copy. No explanation needed — they'll know.</p>
     </section>
 
@@ -167,24 +168,6 @@
     </div>
 
   </main>
-  <script>
-    (function setCopyDomain() {
-      const target = location.hostname.replace(/^www\./, '');
-      const btn = document.getElementById('copyBtn');
-      btn.textContent = target;
-      btn.dataset.copy = target;
-      btn.setAttribute('aria-label', `Copy ${target} to clipboard`);
-    })();
-    function copyTag(el) {
-      const text = el.dataset.copy || el.textContent.trim();
-      if (!el.dataset.copy) el.dataset.copy = text;
-      navigator.clipboard.writeText(text).then(() => {
-        el.textContent = 'copied!';
-        clearTimeout(el._t);
-        el._t = setTimeout(() => { el.textContent = text; }, 1200);
-      });
-    }
-  </script>
 </body>
 
 </html>

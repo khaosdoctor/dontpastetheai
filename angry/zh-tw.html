@@ -8,14 +8,14 @@
   <meta name="description" content="如果你的回覆是一大坨沒改過的 LLM 垃圾，你就是問題所在。">
   <meta property="og:title" content="不要在那邊給我無腦貼 AI">
   <meta property="og:description" content="如果你的回覆是一大坨沒改過的 LLM 垃圾，你就是問題所在。">
-  <meta property="og:image" content="https://dontquotetheai.com/assets/og-image-zhtw.png">
+  <meta property="og:image" content="https://dontpastetheai.com/assets/og-image-zh-tw.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://dontquotetheai.com/angry/zhtw.html">
-  <link rel="canonical" href="https://dontquotetheai.com/angry/zhtw.html">
+  <meta property="og:url" content="https://dontpastetheai.com/angry/zh-tw.html">
+  <link rel="canonical" href="https://dontpastetheai.com/angry/zh-tw.html">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://dontquotetheai.com/assets/og-image-zhtw.png">
+  <meta name="twitter:image" content="https://dontpastetheai.com/assets/og-image-zh-tw.png">
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
@@ -28,13 +28,14 @@
     }
   </style>
   <link rel="stylesheet" href="../styles.css">
-  <link rel="alternate" hreflang="en" href="https://dontquotetheai.com/angry/">
-  <link rel="alternate" hreflang="pt-BR" href="https://dontquotetheai.com/angry/ptbr.html">
-  <link rel="alternate" hreflang="ru" href="https://dontquotetheai.com/angry/ru.html">
-  <link rel="alternate" hreflang="zh-TW" href="https://dontquotetheai.com/angry/zhtw.html">
-  <link rel="alternate" hreflang="zh-CN" href="https://dontquotetheai.com/angry/zh-cn.html">
-  <link rel="alternate" hreflang="x-default" href="https://dontquotetheai.com/angry/">
+  <link rel="alternate" hreflang="en" href="https://dontpastetheai.com/angry/">
+  <link rel="alternate" hreflang="pt-BR" href="https://dontpastetheai.com/angry/pt-br.html">
+  <link rel="alternate" hreflang="ru" href="https://dontpastetheai.com/angry/ru.html">
+  <link rel="alternate" hreflang="zh-TW" href="https://dontpastetheai.com/angry/zh-tw.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://dontpastetheai.com/angry/zh-cn.html">
+  <link rel="alternate" hreflang="x-default" href="https://dontpastetheai.com/angry/">
   <script src="../assets/translations.js" defer></script>
+  <script src="../assets/copy.js" defer></script>
 </head>
 
 <body>
@@ -44,7 +45,7 @@
       <div class="doc-meta">
         <span>如果你想看自己母語的炎上版本：</span>
         <label class="lang" aria-label="Language">
-          <select data-lang-select><option>EN — English</option></select>
+          <select data-lang-select><option>ZH — 繁體中文 (台灣)</option></select>
         </label>
       </div>
       <h1>不要在那邊給我<br>無腦貼 <span class="yell">AI</span>。</h1>
@@ -114,15 +115,15 @@
     <section>
       <h2>這個網頁要怎麼用</h2>
       <p>下次如果有人在你的私訊、Slack、程式碼審查（Code Review）或任何地方，丟了一大坨連改都沒改過的 LLM 廢話，直接把這個傳給他：</p>
-      <p class="u-center u-mt-lg"><button id="copyBtn" type="button" class="url-tag-big" onclick="copyTag(this)"
-          aria-label="複製 dontpastetheai.com 到剪貼簿">dontpastetheai.com</button></p>
+      <p class="u-center u-mt-lg"><button id="copyBtn" type="button" class="url-tag-big"
+          data-copy-aria="複製 {domain} 到剪貼簿" data-copied-text="已複製！">dontpastetheai.com</button></p>
       <p class="u-center u-small u-muted u-mt-md">點擊複製。什麼都不用解釋——他們會懂的。</p>
     </section>
 
     <section>
       <h2>太嗆了嗎？</h2>
       <p>合理。如果你比較想傳一個適合職場的溫和版本，這裡請：</p>
-      <p class="u-center u-mt-lg"><a class="cta-calm" href="../zhtw.html">← 帶我去有禮貌的版本</a></p>
+      <p class="u-center u-mt-lg"><a class="cta-calm" href="../zh-tw.html">← 帶我去有禮貌的版本</a></p>
     </section>
 
     <div class="signature">
@@ -139,24 +140,6 @@
     </div>
 
   </main>
-  <script>
-    (function setCopyDomain() {
-      const target = location.hostname.replace(/^www\./, '');
-      const btn = document.getElementById('copyBtn');
-      btn.textContent = target;
-      btn.dataset.copy = target;
-      btn.setAttribute('aria-label', `複製 ${target} 到剪貼簿`);
-    })();
-    function copyTag(el) {
-      const text = el.dataset.copy || el.textContent.trim();
-      if (!el.dataset.copy) el.dataset.copy = text;
-      navigator.clipboard.writeText(text).then(() => {
-        el.textContent = '已複製！';
-        clearTimeout(el._t);
-        el._t = setTimeout(() => { el.textContent = text; }, 1200);
-      });
-    }
-  </script>
 </body>
 
 </html>

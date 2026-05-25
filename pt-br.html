@@ -8,14 +8,14 @@
   <meta name="description" content="Se te perguntaram algo, manda a sua resposta — não a do chatbot.">
   <meta property="og:title" content="Não cola a IA, por favor.">
   <meta property="og:description" content="Se te perguntaram algo, manda a sua resposta — não a do chatbot.">
-  <meta property="og:image" content="https://dontquotetheai.com/assets/og-image-ptbr.png">
+  <meta property="og:image" content="https://dontpastetheai.com/assets/og-image-pt-br.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://dontquotetheai.com/ptbr.html">
-  <link rel="canonical" href="https://dontquotetheai.com/ptbr.html">
+  <meta property="og:url" content="https://dontpastetheai.com/pt-br.html">
+  <link rel="canonical" href="https://dontpastetheai.com/pt-br.html">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://dontquotetheai.com/assets/og-image-ptbr.png">
+  <meta name="twitter:image" content="https://dontpastetheai.com/assets/og-image-pt-br.png">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -25,13 +25,14 @@
     href="https://fonts.googleapis.com/css2?family=Special+Elite&family=JetBrains+Mono:wght@400;500;700;800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <link rel="alternate" hreflang="en" href="https://dontquotetheai.com/">
-  <link rel="alternate" hreflang="pt-BR" href="https://dontquotetheai.com/ptbr.html">
-  <link rel="alternate" hreflang="ru" href="https://dontquotetheai.com/ru.html">
-  <link rel="alternate" hreflang="zh-TW" href="https://dontquotetheai.com/zhtw.html">
-  <link rel="alternate" hreflang="zh-CN" href="https://dontquotetheai.com/zh-cn.html">
-  <link rel="alternate" hreflang="x-default" href="https://dontquotetheai.com/">
+  <link rel="alternate" hreflang="en" href="https://dontpastetheai.com/">
+  <link rel="alternate" hreflang="pt-BR" href="https://dontpastetheai.com/pt-br.html">
+  <link rel="alternate" hreflang="ru" href="https://dontpastetheai.com/ru.html">
+  <link rel="alternate" hreflang="zh-TW" href="https://dontpastetheai.com/zh-tw.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://dontpastetheai.com/zh-cn.html">
+  <link rel="alternate" hreflang="x-default" href="https://dontpastetheai.com/">
   <script src="assets/translations.js" defer></script>
+  <script src="assets/copy.js" defer></script>
 </head>
 
 <body>
@@ -41,7 +42,7 @@
       <div class="doc-meta">
         <span>Prefere outro idioma?</span>
         <label class="lang" aria-label="Idioma">
-          <select data-lang-select><option>EN — English</option></select>
+          <select data-lang-select><option>PT — Português (BR)</option></select>
         </label>
       </div>
       <h1>Não cola<br>a <span class="yell">IA</span>, por favor.</h1>
@@ -81,15 +82,15 @@
       <h2>Quer mandar isso pra alguém?</h2>
       <p>Se alguém acabou de cometer uma parede de texto de LLM no seu DM, Slack ou code review, você
         pode mandar esse link. Sem precisar dar sermão.</p>
-      <p class="u-center u-mt-lg"><button id="copyBtn" type="button" class="url-tag-big" onclick="copyTag(this)"
-          aria-label="Copiar dontpastetheai.com para clipboard">dontpastetheai.com</button></p>
+      <p class="u-center u-mt-lg"><button id="copyBtn" type="button" class="url-tag-big"
+          data-copy-aria="Copiar {domain} para clipboard" data-copied-text="copiado!">dontpastetheai.com</button></p>
       <p class="u-center u-small u-muted u-mt-md">Clique pra copiar. A pessoa vai entender.</p>
     </section>
 
     <section>
       <h2>Quer uma versão mais bruta?</h2>
       <p>Se você prefere mandar a versão com <em>sentimentos</em> envolvidos, a gente tem!</p>
-      <p class="u-center u-mt-lg"><a class="cta-angry" href="angry/ptbr.html">Me leva pra versão com raiva →</a></p>
+      <p class="u-center u-mt-lg"><a class="cta-angry" href="angry/pt-br.html">Me leva pra versão com raiva →</a></p>
       <p class="u-center u-small u-muted u-mt-md">Seu gerente pode não gostar disso...</p>
     </section>
 
@@ -109,24 +110,6 @@
     </div>
 
   </main>
-  <script>
-    (function setCopyDomain() {
-      const target = location.hostname.replace(/^www\./, '');
-      const btn = document.getElementById('copyBtn');
-      btn.textContent = target;
-      btn.dataset.copy = target;
-      btn.setAttribute('aria-label', `Copiar ${target} para clipboard`);
-    })();
-    function copyTag(el) {
-      const text = el.dataset.copy || el.textContent.trim();
-      if (!el.dataset.copy) el.dataset.copy = text;
-      navigator.clipboard.writeText(text).then(() => {
-        el.textContent = 'copiado!';
-        clearTimeout(el._t);
-        el._t = setTimeout(() => { el.textContent = text; }, 1200);
-      });
-    }
-  </script>
 </body>
 
 </html>

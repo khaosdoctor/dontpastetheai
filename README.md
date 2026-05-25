@@ -8,7 +8,21 @@ You know... That one.
 
 > **This is satire.** Nobody is being attacked, nobody is being cancelled, nobody hates AI, have some humor. Use the tools. Just, you know, read them first.
 
-PRs welcome, especially translations. This is a static HTML page, like the aztecs used to do back in the day.
+Spiritual cousin of [nohello.net](https://nohello.net) and [dontasktoask.com](https://dontasktoask.com). Static HTML, like the aztecs used to do back in the day. PRs welcome — especially translations.
+
+## Translations
+
+> **Don't see your language?** Translations are how this page actually helps people. The whole process is in [TRANSLATING.md](TRANSLATING.md) and the GitHub Action will check most of it for you — you just need to translate the text. PRs welcome.
+
+| Language | Smooth | Angry | OG image | Maintainer |
+|----------|--------|-------|----------|-----------|
+| English (`en`) | ✅ [index.html](index.html) | ✅ [angry/](angry/) | ✅ | — |
+| Português (BR) (`pt-br`) | ✅ [pt-br.html](pt-br.html) | ✅ [angry/pt-br.html](angry/pt-br.html) | ✅ | — |
+| Русский (`ru`) | ✅ [ru.html](ru.html) | ✅ [angry/ru.html](angry/ru.html) | ✅ | — |
+| 繁體中文 (`zh-tw`) | ✅ [zh-tw.html](zh-tw.html) | ✅ [angry/zh-tw.html](angry/zh-tw.html) | ✅ | — |
+| 简体中文 (`zh-cn`) | ✅ [zh-cn.html](zh-cn.html) | ✅ [angry/zh-cn.html](angry/zh-cn.html) | ✅ | — |
+
+Want to suggest a language? Open an issue or just send the PR — even a half-finished one. We can iterate.
 
 ## Two versions
 
@@ -20,121 +34,33 @@ The site comes in two flavors. Pick whichever one fits:
 They cross-link to each other (red button on smooth → angry, green button on angry → smooth). Each has its own translations at the same path:
 
 ```
-/               → smooth EN
-/ptbr.html      → smooth PT-BR
-/angry/         → angry EN
-/angry/ptbr.html → angry PT-BR
+/                  → smooth EN
+/pt-br.html        → smooth PT-BR
+/angry/            → angry EN
+/angry/pt-br.html  → angry PT-BR
 ```
 
 CSS and assets live at the root (`/styles.css`, `/assets/`). Angry pages reference them with `../`.
 
-The copy button reads `location.hostname` on load and copies whichever domain the visitor landed on (dontpastetheai.com or dontquotetheai.com). The static button text in the HTML is there as a fallback if JS doesn't run.
+## How it works
 
-The language dropdown is built at runtime by `assets/translations.js` from `assets/translations.json`. Each HTML file just ships `<select data-lang-select><option>EN — English</option></select>` (the English option is a no-JS fallback); the script clears that and repopulates from the JSON. `<link rel="alternate" hreflang="...">` tags stay static in each `<head>` on purpose — Googlebot renders JS but Bing / Yandex / Baidu are flaky about it, and we'd rather not gamble on SEO for the RU and ZH versions.
+Static HTML. No build step. A few things worth knowing:
 
-## How to translate
-
-Each language is one HTML file per version. You need to translate **both** smooth and angry (they're separate with different tones, not one doc).
-
-### The process
-
-1. Pick a language code ([BCP 47 format](https://en.wikipedia.org/wiki/IETF_language_tag)) — `pt-BR` not `pt_BR`, `zh-CN` not `zh_cn`, etc.
-2. Copy the files. Smooth and angry **share filenames** — `ptbr.html` lives at both `/ptbr.html` and `/angry/ptbr.html`:
-   - `index.html` → `<code>.html` (smooth)
-   - `angry/index.html` → `angry/<code>.html` (angry)
-   So for Spanish: `es.html` and `angry/es.html`.
-3. Translate all the visible text. Things that need it:
-   - `<title>` and `<meta>` description tags
-   - `og:title` and `og:description`
-   - `<html lang="...">` attribute
-   - Everything visible inside `<header>`, `<section>`, `<blockquote>`, `<ol>`, `.shout`, `.signature`, `.footer`
-   - The language `<select>` `aria-label`
-   - Button `aria-label` and the "copied!" string in the `<script>` (if you want localized feedback)
-   - The cross-link button text (red `.cta-angry` on smooth, green `.cta-calm` on angry)
-   - `og:url` and `<link rel="canonical">` to point at your file:
-     - smooth: `https://dontpastetheai.com/<code>.html`
-     - angry: `https://dontpastetheai.com/angry/<code>.html`
-4. Don't touch these:
-   - CSS classes, HTML structure, `<script>` logic, the `<select data-lang-select>` markup
-   - The `dontpastetheai.com` text in the copy button (JS rewrites it at runtime)
-   - The fallback `<option>EN — English</option>` inside the select (it's there for no-JS, and the script clears it before populating)
-   - Font links, OG image paths (just change the filename suffix)
-   - Cross-link `href` (smooth → `angry/<code>.html`, angry → `../<code>.html`)
-   - GitHub link, nohello/dontasktoask links, YouTube "mad" link
-   - In angry files, the `../styles.css` and `../assets/translations.js` relative paths
-5. Register the language **once** in `assets/translations.json`:
-   ```json
-   {
-     "code": "es",
-     "hreflang": "es",
-     "label": "ES — Español",
-     "file": "es.html"
-   }
-   ```
-   Same `file` value applies to both smooth (`/es.html`) and angry (`/angry/es.html`). The dropdown in every existing page picks it up automatically — no per-file `<option>` edits.
-6. Add `hreflang` links in the `<head>` of **every** existing HTML file, pointing to yours. These are intentionally kept static (not JS-injected) so Bing, Yandex, and Baidu pick them up reliably. Smooth links to smooth, angry links to angry:
-   ```html
-   <!-- in smooth pages -->
-   <link rel="alternate" hreflang="xx-XX" href="https://dontpastetheai.com/yourfile.html">
-   <!-- in angry pages -->
-   <link rel="alternate" hreflang="xx-XX" href="https://dontpastetheai.com/angry/yourfile.html">
-   ```
-7. Create an OG image (see below).
-8. Open a PR.
-
-### OG image (social card)
-
-Each language needs its own card so Twitter/Slack/etc show the right preview.
-
-File pattern: `assets/og-image-<lang>.svg` and `assets/og-image-<lang>.png`. English is just `og-image.svg`/`.png` (no suffix). Portuguese is `og-image-ptbr.svg`/`.png`. Match the suffix to your HTML filename. Same language can use one OG image for both versions, or ship two (`og-image-<lang>.png` and `og-image-<lang>-angry.png`) if you want different previews.
-
-#### Making it
-
-1. Copy `assets/og-image.svg` to `assets/og-image-<lang>.svg`.
-2. Open it and find the three `<text>` elements that say "Oops, you pasted / the AI without / reading it." Translate them. Keep the red `<tspan fill="#a82820">` (whatever your word for "AI" is) so the color stays. Try to keep line lengths balanced or the text overflows.
-3. Leave the `dontpastetheai.com` in the yellow tag alone (that's the domain).
-4. Render to PNG at 1200×630. You need `Special Elite` and `JetBrains Mono` installed locally. Get them from Google Fonts, put the `.ttf` files in `~/.local/share/fonts/`, run `fc-cache -f`, then:
-
-   ```bash
-   rsvg-convert -w 1200 -h 630 assets/og-image-<lang>.svg -o assets/og-image-<lang>.png
-   ```
-
-   No `rsvg-convert`? Inkscape, ImageMagick, or any SVG→PNG web tool works. Just make sure it's exactly 1200×630.
-5. Update `og:image` and `twitter:image` in your HTML to point at your PNG.
-
-Can't render locally? Ship the SVG in the PR and say so, we'll handle it.
-
-#### Non-Latin scripts (Cyrillic, CJK, Arabic, etc.)
-
-`Special Elite` is Latin-only. It won't render Cyrillic, Chinese, Japanese, Korean, Arabic, Hebrew, Thai, or basically anything non-A–Z. You'll get empty boxes or a fallback font.
-
-What to do:
-
-- Pick a monospace display font that matches the vibe (typewriter, slightly rough). Good bets: `Courier Prime` (broad coverage), `IBM Plex Mono` (Latin + Cyrillic + Greek + JP/KR), `Noto Sans Mono` (everything), `JetBrains Mono` (already loaded, decent Cyrillic).
-- In your HTML only, swap the Google Fonts `<link>` and update the `--font-type` CSS variable in a `<style>` block in `<head>`. Don't touch `styles.css`.
-- In your OG SVG, change `font-family="Special Elite"` to your font. Make sure it's installed before rendering.
-- It won't look identical to English, and that's fine. Aim for "same vibe in my script" not "pixel-perfect match".
-
-Not sure? Open a PR with your best guess and we'll iterate.
-
-### Tone notes
-
-The two versions have different tones. Don't merge them, keep them separate.
-
-- **Smooth version**: friendly, work-safe, nohello.net-ish. Direct without being aggressive. Picture sending this to a coworker you respect and don't want to weird out. No swearing, no insults, just a clear ask. Check `ptbr.html` for how PT-BR does it.
-- **Angry version**: satire with actual feelings. Frustrated, opinionated, a bit rude on purpose. Don't smooth it into corporate-speak. If your language has real slang for "lazy AI paste behavior", use it. Goal: reader feels called out, not lectured. Look at `angry/ptbr.html` — it's how people actually talk in Portuguese, not textbook stuff.
-
-### Right-to-left languages?
-
-Add `dir="rtl"` to the `<html>` tag. CSS doesn't have logical properties everywhere yet, so layout might look weird. Open the PR anyway, we'll fix it in review.
+- The language dropdown is built at runtime by `assets/translations.js` from `assets/translations.json`. Each HTML file ships a single `<option>` matching its own language as a no-JS fallback; the script clears that and repopulates from the JSON. Add a language once in the JSON and every page picks it up.
+- `<link rel="alternate" hreflang="...">` tags stay **static** in each `<head>` on purpose — Googlebot renders JS but Bing / Yandex / Baidu are flaky about it, and we'd rather not gamble on SEO.
+- The copy button reads `location.hostname` so the same code works on both domains (dontpastetheai.com or dontquotetheai.com) — it copies whichever one the visitor landed on. The inline `<script>` that used to live in every HTML file got deduped into `assets/copy.js`; translatable strings come from `data-copy-aria` and `data-copied-text` attributes on the button itself.
 
 ## Local dev
 
-No build step. Open `index.html` in a browser, or run `python3 -m http.server` from the repo root if you want a local server. Angry pages are at `/angry/index.html` and `/angry/ptbr.html`.
+No build step. Open `index.html` in a browser, or run `python3 -m http.server` from the repo root if you want a local server. Angry pages are at `/angry/index.html` and friends.
 
 ## Deploy
 
-Cloudflare Workers Assets via `wrangler.jsonc`. Pushes to `main` go live automatically. Served at both `dontpastetheai.com` and `dontquotetheai.com`, and the copy button shows whichever domain the visitor is on.
+Cloudflare Workers Assets via `wrangler.jsonc`. Pushes to `main` go live automatically. Served at both `dontpastetheai.com` (canonical) and `dontquotetheai.com` (redirect/mirror) — the copy button shows whichever domain the visitor is on.
+
+## Contributing translations
+
+See [TRANSLATING.md](TRANSLATING.md). The GitHub Action validates PRs and tells you exactly what's missing, so don't overthink it.
 
 ## License
 

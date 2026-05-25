@@ -9,14 +9,14 @@
     <meta property="og:title" content="Не цитируй мне нейросеть">
     <meta property="og:description"
         content="Если твой ответ — это стена неотредактированного текста от LLM, ты — проблема.">
-    <meta property="og:image" content="https://dontquotetheai.com/assets/og-image-ru.png">
+    <meta property="og:image" content="https://dontpastetheai.com/assets/og-image-ru.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://dontquotetheai.com/angry/ru.html">
-    <link rel="canonical" href="https://dontquotetheai.com/angry/ru.html">
+    <meta property="og:url" content="https://dontpastetheai.com/angry/ru.html">
+    <link rel="canonical" href="https://dontpastetheai.com/angry/ru.html">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://dontquotetheai.com/assets/og-image-ru.png">
+    <meta name="twitter:image" content="https://dontpastetheai.com/assets/og-image-ru.png">
     <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
     <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
@@ -26,13 +26,14 @@
         href="https://fonts.googleapis.com/css2?family=Special+Elite&family=JetBrains+Mono:wght@400;500;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
-    <link rel="alternate" hreflang="en" href="https://dontquotetheai.com/angry/">
-    <link rel="alternate" hreflang="pt-BR" href="https://dontquotetheai.com/angry/ptbr.html">
-    <link rel="alternate" hreflang="ru" href="https://dontquotetheai.com/angry/ru.html">
-    <link rel="alternate" hreflang="zh-TW" href="https://dontquotetheai.com/angry/zhtw.html">
-    <link rel="alternate" hreflang="zh-CN" href="https://dontquotetheai.com/angry/zh-cn.html">
-    <link rel="alternate" hreflang="x-default" href="https://dontquotetheai.com/angry/">
+    <link rel="alternate" hreflang="en" href="https://dontpastetheai.com/angry/">
+    <link rel="alternate" hreflang="pt-BR" href="https://dontpastetheai.com/angry/pt-br.html">
+    <link rel="alternate" hreflang="ru" href="https://dontpastetheai.com/angry/ru.html">
+    <link rel="alternate" hreflang="zh-TW" href="https://dontpastetheai.com/angry/zh-tw.html">
+    <link rel="alternate" hreflang="zh-CN" href="https://dontpastetheai.com/angry/zh-cn.html">
+    <link rel="alternate" hreflang="x-default" href="https://dontpastetheai.com/angry/">
     <script src="../assets/translations.js" defer></script>
+    <script src="../assets/copy.js" defer></script>
 </head>
 
 <body>
@@ -42,7 +43,7 @@
             <div class="doc-meta">
                 <span>Если вы хотите получить текст на вашем родном языке:</span>
                 <label class="lang" aria-label="Language">
-                    <select data-lang-select><option>EN — English</option></select>
+                    <select data-lang-select><option>RU — Русский</option></select>
                 </label>
             </div>
             <h1>Не цитируй<br>мне <span class="yell">нейросеть</span>.</h1>
@@ -167,8 +168,8 @@
             <p>В следующий раз, когда кто-то ответит в твои личные сообщения, в Slack, на код-ревью — куда угодно —
                 прекрасным
                 массивом нередактированного текста из LLM, отправь им это:</p>
-            <p class="u-center u-mt-lg"><button id="copyBtn" type="button" class="url-tag-big" onclick="copyTag(this)"
-                    aria-label="Скопировать dontquotetheai.com в буфер обмена">dontquotetheai.com</button></p>
+            <p class="u-center u-mt-lg"><button id="copyBtn" type="button" class="url-tag-big"
+                    data-copy-aria="Скопировать {domain} в буфер обмена" data-copied-text="скопировано!">dontpastetheai.com</button></p>
             <p class="u-center u-small u-muted u-mt-md">Нажми, чтобы скопировать. Никаких объяснений не нужно — они
                 поймут.
             </p>
@@ -199,24 +200,6 @@
         </div>
 
     </main>
-    <script>
-        (function setCopyDomain() {
-            const target = location.hostname.replace(/^www\./, '');
-            const btn = document.getElementById('copyBtn');
-            btn.textContent = target;
-            btn.dataset.copy = target;
-            btn.setAttribute('aria-label', `Скопировать ${target} в буфер обмена`);
-        })();
-        function copyTag(el) {
-            const text = el.dataset.copy || el.textContent.trim();
-            if (!el.dataset.copy) el.dataset.copy = text;
-            navigator.clipboard.writeText(text).then(() => {
-                el.textContent = 'скопировано!';
-                clearTimeout(el._t);
-                el._t = setTimeout(() => { el.textContent = text; }, 1200);
-            });
-        }
-    </script>
 </body>
 
 </html>
